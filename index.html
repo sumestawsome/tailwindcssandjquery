@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sumesta Creative - Frontend Developer & Web Solutions"
+    />
+    <title>Sumesta Creative - Frontend Developer</title>
+    <link rel="icon" type="image/png" href="assets/Sumesta Creative-logo.png" />
+    <style>
+      :root {
+        --color-primary: #f97316;
+        --color-primary-hover: #ea580c;
+        --color-primary-light: #fff7ed;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: "#f97316",
+                hover: "#ea580c",
+                light: "#fff7ed",
+                50: "#fff7ed",
+                100: "#ffedd5",
+                500: "#f97316",
+                600: "#ea580c",
+              },
+              brand: {
+                DEFAULT: "#f97316",
+                hover: "#ea580c",
+                50: "#fff7ed",
+                500: "#f97316",
+                600: "#ea580c",
+              },
+            },
+            keyframes: {
+              "bounce-soft": {
+                "0%, 100%": {
+                  transform: "translateY(-8px)",
+                  animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
+                },
+                "50%": {
+                  transform: "translateY(0)",
+                  animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+                },
+              },
+            },
+            animation: {
+              "bounce-soft": "bounce-soft 2.5s infinite",
+            },
+          },
+        },
+      };
+    </script>
+    <script>
+      if (
+        localStorage.getItem("theme") === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body
+    class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 transition-colors duration-300"
+  >
+    <!-- Header & Navigasi -->
+    <header
+      class="border-b border-gray-200 dark:border-gray-800 sticky top-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur z-50"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap py-4 flex-row items-center justify-between">
+          <!-- Logo & Brand -->
+          <a
+            href="index.html"
+            class="flex items-center gap-2 font-bold text-gray-900 dark:text-white"
+          >
+            <img
+              src="assets/Sumesta Creative-logo.png"
+              alt="Sumesta Creative Logo"
+              class="h-8 md:h-9 w-auto object-contain"
+            />
+            <span class="hidden sm:inline text-lg tracking-wide"
+              >Sumesta Creative</span
+            >
+          </a>
+
+          <!-- Menu Desktop -->
+          <nav class="hidden md:flex items-center text-base gap-8">
+            <a
+              href="index.html"
+              class="text-primary font-bold"
+              >Beranda</a
+            >
+            <a
+              href="projects.html"
+              class="hover:text-primary font-medium transition"
+              >Portofolio</a
+            >
+            <a
+              href="contact.html"
+              class="hover:text-primary font-medium transition"
+              >Kontak</a
+            >
+            <a
+              href="contact.html"
+              class="text-white bg-primary hover:bg-primary-hover py-2 px-4 rounded-lg text-sm font-semibold transition"
+              >Kolaborasi</a
+            >
+          </nav>
+
+          <!-- Tema & Menu Mobile -->
+          <div class="flex items-center gap-3">
+            <button
+              id="theme-toggle"
+              class="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300 hover:text-primary focus:outline-none transition"
+              aria-label="Toggle dark mode"
+            >
+              <svg
+                id="theme-icon-dark"
+                class="w-5 h-5 hidden"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                ></path>
+              </svg>
+              <svg
+                id="theme-icon-light"
+                class="w-5 h-5 hidden"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+
+            <!-- Tombol Hamburger -->
+            <button
+              id="menu-toggle"
+              class="md:hidden p-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-300 hover:text-primary focus:outline-none transition"
+              aria-label="Toggle menu"
+            >
+              <svg
+                id="menu-icon"
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+              <svg
+                id="close-icon"
+                class="w-5 h-5 hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Menu Navigasi Mobile -->
+        <nav
+          id="mobile-menu"
+          class="hidden md:hidden pb-4 border-t border-gray-200 dark:border-gray-800"
+        >
+          <div class="flex flex-col gap-2 pt-4">
+            <a
+              href="index.html"
+              class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-primary font-bold transition"
+            >
+              Beranda
+            </a>
+            <a
+              href="projects.html"
+              class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary font-medium transition"
+            >
+              Portofolio
+            </a>
+            <a
+              href="contact.html"
+              class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary font-medium transition"
+            >
+              Kontak
+            </a>
+            <a
+              href="contact.html"
+              class="block mt-2 text-white bg-primary border-0 py-2 px-4 focus:outline-none hover:bg-primary-hover rounded text-sm font-semibold transition"
+            >
+              Kolaborasi
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-6 pb-12 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+          <div
+            class="flex-1 flex flex-col items-center text-center md:items-start md:text-left mb-16 md:mb-0"
+          >
+            <h1
+              class="text-3xl sm:text-5xl mb-4 font-bold text-gray-900 dark:text-white leading-tight text-center md:text-left"
+            >
+              Membangun Solusi Web <br class="hidden lg:inline-block" />
+              <span id="typewriter-text" class="text-primary"></span>
+              <span
+                class="inline-block text-primary animate-pulse font-light"
+                >|</span
+              >
+            </h1>
+            <p
+              class="mb-8 leading-relaxed text-gray-600 dark:text-gray-300 text-center md:text-left max-w-lg md:max-w-none"
+            >
+              Frontend Developer berpengalaman dalam menciptakan antarmuka
+              user-centric menggunakan HTML5, Tailwind CSS, JavaScript, dan
+              Firebase Cloud Platform.
+            </p>
+            <div class="flex justify-center md:justify-start gap-4 w-full">
+              <a
+                href="projects.html"
+                class="inline-flex justify-center text-white bg-primary border-0 py-3 px-6 focus:outline-none hover:bg-primary-hover rounded-lg text-base font-semibold shadow-lg shadow-primary/20 transition"
+              >
+                Lihat Portofolio
+              </a>
+              <a
+                href="contact.html"
+                class="inline-flex justify-center text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 border-0 py-3 px-6 focus:outline-none hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-base font-semibold transition"
+              >
+                Hubungi Saya
+              </a>
+            </div>
+          </div>
+          <div class="flex-1 w-full">
+            <img
+              id="hero-img-light"
+              class="object-cover object-center w-full block dark:hidden animate-bounce-soft"
+              alt="Hero Sumesta Creative"
+              src="assets/FOTO-HERO.png"
+            />
+            <img
+              id="hero-img-dark"
+              class="object-cover object-center w-full hidden dark:block animate-bounce-soft"
+              alt="Hero Sumesta Creative Dark"
+              src="assets/FOTO-HERO-dark.png"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keahlian & Tech Stack -->
+    <section
+      id="keahlian"
+      class="py-16 md:py-24 border-t border-gray-100 dark:border-gray-800"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+          <h2
+            class="text-3xl font-bold text-center text-gray-900 dark:text-white"
+          >
+            Keahlian & Ekosistem
+          </h2>
+          <div class="h-1 w-20 bg-primary rounded mx-auto my-3"></div>
+          <p
+            class="text-base text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto"
+          >
+            Fondasi dan alat yang rutin saya pakai dalam memproduksi aplikasi
+            web berkualitas tinggi.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            class="border border-gray-200 dark:border-gray-700 p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-lg bg-primary-50 dark:bg-primary/20 text-primary mb-4 font-bold"
+            >
+              01
+            </div>
+            <h3 class="text-lg text-gray-900 dark:text-white font-bold mb-2">
+              HTML5 & Semantik Web
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Menyusun struktur web yang ramah aksesibilitas, SEO-friendly, dan
+              bersih.
+            </p>
+          </div>
+          <div
+            class="border border-gray-200 dark:border-gray-700 p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-lg bg-primary-50 dark:bg-primary/20 text-primary mb-4 font-bold"
+            >
+              02
+            </div>
+            <h3 class="text-lg text-gray-900 dark:text-white font-bold mb-2">
+              Tailwind CSS & Tata Letak
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Implementasi Flexbox, CSS Grid, serta desain responsif
+              multi-perangkat.
+            </p>
+          </div>
+          <div
+            class="border border-gray-200 dark:border-gray-700 p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-lg bg-primary-50 dark:bg-primary/20 text-primary mb-4 font-bold"
+            >
+              03
+            </div>
+            <h3 class="text-lg text-gray-900 dark:text-white font-bold mb-2">
+              JavaScript & DOM
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Menciptakan komponen interaktif, pemfilteran data, dan
+              sinkronisasi state.
+            </p>
+          </div>
+          <div
+            class="border border-gray-200 dark:border-gray-700 p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-lg bg-primary-50 dark:bg-primary/20 text-primary mb-4 font-bold"
+            >
+              04
+            </div>
+            <h3 class="text-lg text-gray-900 dark:text-white font-bold mb-2">
+              Firebase Cloud Platform
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Pengelolaan Firebase Hosting, Firestore database, dan integrasi
+              CI/CD.
+            </p>
+          </div>
+          <div
+            class="border border-gray-200 dark:border-gray-700 p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-lg bg-primary-50 dark:bg-primary/20 text-primary mb-4 font-bold"
+            >
+              05
+            </div>
+            <h3 class="text-lg text-gray-900 dark:text-white font-bold mb-2">
+              Git & GitHub Actions
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Kontrol versi terstruktur serta otomatisasi alur deploy setiap
+              commit.
+            </p>
+          </div>
+          <div
+            class="border border-gray-200 dark:border-gray-700 p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition"
+          >
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-lg bg-primary-50 dark:bg-primary/20 text-primary mb-4 font-bold"
+            >
+              06
+            </div>
+            <h3 class="text-lg text-gray-900 dark:text-white font-bold mb-2">
+              Browser Automation
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Eksplorasi AI agent, Playwright, dan pengujian otomasi halaman
+              web.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyek Unggulan -->
+    <section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-800/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row md:items-end md:justify-between mb-12"
+        >
+          <div>
+            <h2
+              class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2"
+            >
+              Proyek Unggulan
+            </h2>
+            <div class="h-1 w-20 bg-primary rounded mx-auto md:mx-0 my-3"></div>
+          </div>
+          <a
+            href="projects.html"
+            class="text-primary font-semibold hover:underline mt-4 md:mt-0 inline-flex items-center transition"
+          >
+            Lihat Semua Portofolio &rarr;
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Proyek 1: Website Portofolio -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition"
+          >
+            <img
+              class="h-48 w-full object-cover"
+              src="assets/project1.png"
+              alt="Website Portofolio"
+            />
+            <div class="p-6">
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >HTML</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >CSS</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >JavaScript</span
+                >
+              </div>
+              <h3
+                class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2"
+              >
+                Website Portofolio
+              </h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Website portofolio pribadi responsif yang dibuat menggunakan template HTML dan CSS murni tanpa framework, yang saya download dari Envato, lalu kembangkan sesuai kebutuhan saya.
+              </p>
+              <a
+                href="https://sumesta-df6a8.web.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary font-medium inline-flex items-center text-sm hover:text-primary-hover transition"
+              >
+                Pelajari &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Proyek 2: Website Indopride Store -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition"
+          >
+            <img
+              class="h-48 w-full object-cover"
+              src="assets/project2.png"
+              alt="Website Indopride Store"
+            />
+            <div class="p-6">
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >HTML</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >CSS</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >JavaScript</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Firebase Firestore</span
+                >
+              </div>
+              <h3
+                class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2"
+              >
+                Website Indopride Store
+              </h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Website toko online Indopride Store yang dibuat menggunakan teknologi Next.js dengan banyak framework, yang saya buat dengan bantuan AI, dan saya sesuaikan dengan kebutuhan saya.
+              </p>
+              <a
+                href="https://indopride.top"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary font-medium inline-flex items-center text-sm hover:text-primary-hover transition"
+              >
+                Pelajari &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Proyek 3: Website jobdex-in.vercel.app -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition"
+          >
+            <img
+              class="h-48 w-full object-cover"
+              src="assets/project3.png"
+              alt="Website jobdex-in.vercel.app"
+            />
+            <div class="p-6">
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >HTML</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >CSS</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >JavaScript</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Vercel</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Firebase Firestore</span
+                >
+              </div>
+              <h3
+                class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2"
+              >
+                Website jobdex-in.vercel.app
+              </h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Website pengatur jadwal berbasis web dan connect dengan wa grup, yang dibuat menggunakan teknologi Next.js dengan banyak framework, yang saya buat dengan bantuan AI, dan saya sesuaikan dengan kebutuhan saya.
+              </p>
+              <a
+                href="https://jobdex-in.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary font-medium inline-flex items-center text-sm hover:text-primary-hover transition"
+              >
+                Pelajari &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Proyek 4: Website Portfolio Gede Bali Guide -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition"
+          >
+            <img
+              class="h-48 w-full object-cover"
+              src="assets/project4.png"
+              alt="Website Portfolio Gede Bali Guide"
+            />
+            <div class="p-6">
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Next.js</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Firebase</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Vercel</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Tailwind CSS</span
+                >
+              </div>
+              <h3
+                class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2"
+              >
+                Website Portfolio Gede Bali Guide
+              </h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Website portofolio tour guide di Bali yang dirancang dengan Next.js dan Firebase untuk pengelolaan data dinamis (blog & galeri) secara mandiri tanpa perlu koding ulang. Di-hosting di Vercel.
+              </p>
+              <span class="inline-flex items-center text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5"></span>
+                Deployed di Vercel
+              </span>
+            </div>
+          </div>
+
+          <!-- Proyek 5: Toko Saya -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition"
+          >
+            <img
+              class="h-48 w-full object-cover"
+              src="assets/project5.png"
+              alt="Website Toko Saya"
+            />
+            <div class="p-6">
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >React</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Vite</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-medium"
+                  >Tailwind CSS</span
+                >
+              </div>
+              <h3
+                class="text-xl font-bold text-gray-900 dark:text-white mt-1 mb-2"
+              >
+                Toko Saya (E-Commerce Platform)
+              </h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Aplikasi web e-commerce interaktif berbasis React dan Vite yang menyediakan katalog produk dinamis, keranjang belanja, serta antarmuka modern yang responsif.
+              </p>
+              <a
+                href="projects.html"
+                class="text-primary font-medium inline-flex items-center text-sm hover:text-primary-hover transition"
+              >
+                Pelajari &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ajakan Kolaborasi / CTA -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12"
+        >
+          <div class="flex-1">
+            <h2
+              class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+            >
+              Tertarik Membangun Proyek Bersama?
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              Saya selalu terbuka untuk diskusi teknis, kerja sama pembuatan
+              situs web, maupun proyek otomasi peramban.
+            </p>
+          </div>
+          <div
+            class="w-full lg:w-1/3 bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 sm:p-8 border border-gray-200 dark:border-gray-700 shadow-sm mt-8 lg:mt-0"
+          >
+            <h3 class="text-gray-900 dark:text-white text-lg font-bold mb-4">
+              Kirim Pesan Cepat
+            </h3>
+            <form class="mailto-form space-y-4" novalidate>
+              <div>
+                <label for="cta-name" class="block text-sm font-medium mb-1"
+                  >Nama</label
+                >
+                <input
+                  type="text"
+                  id="cta-name"
+                  name="name"
+                  class="w-full bg-white dark:bg-gray-900 rounded border border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm py-2 px-3 outline-none transition"
+                  placeholder="Nama lengkap"
+                />
+              </div>
+              <div>
+                <label for="cta-email" class="block text-sm font-medium mb-1"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="cta-email"
+                  name="email"
+                  class="w-full bg-white dark:bg-gray-900 rounded border border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm py-2 px-3 outline-none transition"
+                  placeholder="alamat@email.com"
+                />
+              </div>
+              <div>
+                <label for="cta-message" class="block text-sm font-medium mb-1"
+                  >Pesan</label
+                >
+                <textarea
+                  id="cta-message"
+                  name="message"
+                  rows="3"
+                  class="w-full bg-white dark:bg-gray-900 rounded border border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm py-2 px-3 outline-none resize-none transition"
+                  placeholder="Tulis pesan kolaborasi..."
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full text-white bg-primary py-2.5 px-4 focus:outline-none hover:bg-primary-hover rounded-lg font-semibold transition"
+              >
+                Mulai Diskusi
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 dark:border-gray-800 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <div class="flex items-center">
+            <span class="text-lg font-bold text-gray-900 dark:text-white"
+              >Sumesta Creative</span
+            >
+            <p
+              class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-300 dark:sm:border-gray-700 mt-0"
+            >
+              &copy; 2026 Hak Cipta Dilindungi.
+            </p>
+          </div>
+          <div class="flex gap-4">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-500 hover:text-primary font-medium text-sm transition"
+            >
+              GitHub
+            </a>
+            <a
+              href="contact.html"
+              class="text-gray-500 hover:text-primary font-medium text-sm transition"
+            >
+              Kontak
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script: Mode Gelap -->
+    <script>
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      const darkIcon = document.getElementById("theme-icon-dark");
+      const lightIcon = document.getElementById("theme-icon-light");
+
+      function syncThemeIcons() {
+        if (document.documentElement.classList.contains("dark")) {
+          lightIcon.classList.remove("hidden");
+          darkIcon.classList.add("hidden");
+        } else {
+          darkIcon.classList.remove("hidden");
+          lightIcon.classList.add("hidden");
+        }
+      }
+      syncThemeIcons();
+
+      themeToggleBtn.addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark");
+        const isDark = document.documentElement.classList.contains("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+        syncThemeIcons();
+      });
+    </script>
+
+    <!-- Script: Menu Mobile -->
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
+      const closeIcon = document.getElementById("close-icon");
+
+      function closeMobileMenu() {
+        mobileMenu.classList.add("hidden");
+        menuIcon.classList.remove("hidden");
+        closeIcon.classList.add("hidden");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        if (mobileMenu.classList.contains("hidden")) {
+          mobileMenu.classList.remove("hidden");
+          menuIcon.classList.add("hidden");
+          closeIcon.classList.remove("hidden");
+        } else {
+          closeMobileMenu();
+        }
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMobileMenu);
+      });
+    </script>
+
+    <!-- Script: Kirim Email via Mailto -->
+    <script>
+      const MAILTO_TARGET = "sumestacreative@gmail.com";
+
+      function dispatchMailto(name, email, message) {
+        const subject = "Pesan Kolaborasi: " + (name || "Tanpa Nama");
+        const body =
+          "Nama: " +
+          (name || "-") +
+          "\n" +
+          "Email: " +
+          (email || "-") +
+          "\n\n" +
+          "Pesan:\n" +
+          (message || "Saya tertarik untuk berkolaborasi.");
+        window.location.href =
+          "mailto:" +
+          MAILTO_TARGET +
+          "?subject=" +
+          encodeURIComponent(subject) +
+          "&body=" +
+          encodeURIComponent(body);
+      }
+
+      document.querySelectorAll(".mailto-form").forEach((form) => {
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const name = form.querySelector('[name="name"]')?.value.trim();
+          const email = form.querySelector('[name="email"]')?.value.trim();
+          const message = form.querySelector('[name="message"]')?.value.trim();
+          dispatchMailto(name, email, message);
+        });
+      });
+    </script>
+
+    <!-- Script: Efek Mesin Tik -->
+    <script>
+      const words = [
+        "Modern & Responsif",
+        "Kreatif & Interaktif",
+        "Cepat & Terstruktur",
+        "Elegan & Fungsional",
+      ];
+
+      const targetElement = document.getElementById("typewriter-text");
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      const typeSpeed = 100;
+      const eraseSpeed = 50;
+      const delayAfterWord = 1800;
+
+      function typeEffect() {
+        const currentWord = words[wordIndex];
+
+        if (isDeleting) {
+          targetElement.textContent = currentWord.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          targetElement.textContent = currentWord.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        if (!isDeleting && charIndex === currentWord.length) {
+          isDeleting = true;
+          setTimeout(typeEffect, delayAfterWord);
+          return;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          setTimeout(typeEffect, 400);
+          return;
+        }
+
+        const currentSpeed = isDeleting ? eraseSpeed : typeSpeed;
+        setTimeout(typeEffect, currentSpeed);
+      }
+
+      document.addEventListener("DOMContentLoaded", typeEffect);
+    </script>
+  </body>
+</html>
